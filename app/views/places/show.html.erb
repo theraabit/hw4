@@ -1,10 +1,27 @@
-<h1><%= @place.name %></h1>
+<h1>My <%= @place.name %> Posts</h1>
 
-<h2>My Posts</h2>
+<p>
+  <a href="/posts/new" class="btn btn-primary">New Post</a>
+</p>
+
 <% for post in @place.posts %>
-  <h3><%= post.title %></h3>
-  <h4><%= post.posted_on %></h4>
-  <p><%= post.description %></p>
+  # NEED TO FIX THIS CONDITIONAL LOGIC <% if @current_user.id == @post.user_id %>
+    <div class="col-md-3 col-sm-6">
+
+      <h4><%= post.title %></h4>
+      <h6><%= post.posted_on %></h6>
+
+      <% if post.uploaded_image.attached? %>
+        <img src="<%= url_for(post.uploaded_image) %>" class="img-fluid">
+      <% else %>
+        <img src="<%= post.image %>" class="img-fluid">
+      <% end %>
+
+      <p><%= post.description %></p>
+
+    </div>
+  <% else %>
+  <% end %>
 <% end %>
 
 <p>
